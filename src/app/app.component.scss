@@ -1,0 +1,78 @@
+.layout {
+  height: 100vh;
+}
+
+.logo {
+  width: 31px;
+  height: 31px;
+  /*background: rgba(255, 255, 255, 0.2);*/
+  margin: 16px 16px 16px 0;
+  float: left;
+
+}
+
+.logo-text {
+  width: 125px;
+  height: 31px;
+  float: left;
+  color: white;
+  font-size: 18px;
+  font-family: 'DIN Alternate'
+}
+
+nz-header {
+  /*position: fixed;*/
+  width: 100%;
+}
+
+[nz-menu] {
+  line-height: 64px;
+}
+
+nz-content {
+  padding: 0 0;
+  /*margin-top: 64px;*/
+  min-height: 1250px;
+}
+
+nz-breadcrumb {
+  margin: 16px 0;
+}
+
+.inner-content {
+  background: #fff;
+  padding: 15px;
+  /*min-height: 380px;*/
+  display: block;
+}
+
+nz-footer {
+  text-align: center;
+}
+
+.cal-day {
+  border-radius: 7px;
+  border: 1px solid #ddd;
+  height: 200px;
+  padding: 4px 4px;
+  font-size: 12px;
+}
+
+.cal-day-item {
+  padding: 0 3px;
+  background-color: #5adbb7;
+  color: white;
+  border-radius: 7px;
+}
+
+@media (min-width: 576px) {
+  .ant-col-sm-3 {
+    display: block;
+    box-sizing: border-box;
+    width: 14.2%;
+  }
+}
+
+
+
+
