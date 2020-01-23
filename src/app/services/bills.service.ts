@@ -7,13 +7,17 @@ import {BehaviorSubject} from 'rxjs';
 @Injectable()
 export class BillsService {
 
-  private billsItemList: any[];
-  private billsSource = new BehaviorSubject(this.billsItemList);
+  private billResults: {
+    results: any[];
+    hash_key: string;
+    cur_balance: number;
+  };
+  private billsSource = new BehaviorSubject(this.billResults);
   public billsList = this.billsSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  loadBills(curBalance, payDate) {
+  loadBills(curBalance, payDate, hashCode) {
 
     let date = null;
     if (!payDate) {
@@ -24,10 +28,17 @@ export class BillsService {
     }
     console.log('date: ', date);
 
-    this.http.get<any>('https://hawleywebdesign.com/api/loadBillDates2.php?user_id=1&current_balance=' + curBalance +
-      '&pay_date=' + date).subscribe(response => {
+    let requestParams = 'user_id=1&pay_date=' + date + '&';
+    if (curBalance) {
+      requestParams += 'current_balance=' + curBalance + '&';
+    }
+    if (hashCode) {
+      requestParams += 'hash_key_token_cs=' + hashCode + '&';
+    }
 
-      this.billsSource.next(response.results);
+    this.http.get<any>('https://hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {
+
+      this.billsSource.next(response);
     },
     (err) => {
       console.log('error', 'Error loading Growth By Standards : ' + err.error.message);

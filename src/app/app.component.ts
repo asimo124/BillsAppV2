@@ -11,6 +11,11 @@ export class AppComponent implements OnInit, OnChanges {
   currentDate;
   curBalance: number;
   title = 'bills2';
+  billResults: {
+    results: any[];
+    hash_key: string;
+    cur_balance: number;
+  };
   billsList: any[];
 
   subs: Subscription[] = [];
@@ -22,9 +27,10 @@ export class AppComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     // get and subscribe to Coachee Growth Benchmarks Download Data
-    this.subs.push(this.billsService.billsList.subscribe(billsList => {
-      if (billsList) {
-        this.billsList = billsList;
+    this.subs.push(this.billsService.billsList.subscribe(response => {
+      if (response) {
+        this.billResults = response;
+        this.billsList = response.results;
         console.log('billsList: ', this.billsList);
       }
     }));
@@ -42,11 +48,12 @@ export class AppComponent implements OnInit, OnChanges {
 
   loadBills() {
 
-    if (this.currentDate) {
-      console.log('this.currentDate: ', this.currentDate.toLocaleString());
+    let hashCode = '';
+    if (this.billResults && this.billResults.hash_key) {
+      hashCode = this.billResults.hash_key;
     }
 
-    const balance = this.curBalance ? this.curBalance : 960;
-    this.billsService.loadBills(balance, this.currentDate);
+    const balance = this.curBalance ? this.curBalance : 0;
+    this.billsService.loadBills(balance, this.currentDate, hashCode);
   }
 }
