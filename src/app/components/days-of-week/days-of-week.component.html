@@ -1,16 +1,19 @@
-<div nz-row nzType="flex" nzJustify="space-around">
-  <div
-    *ngFor="let day of billsDays"
-    nz-col
-    nzXs="8"
-    nzSm="3"
-    class="cal-day"
-  >
-    <span style="font-weight: bold">{{ day.Day }}</span>
-    <app-expense
-      [expenses]="day.desc"
-    ></app-expense>
-    <div style="clear:both; height: 4px"></div>
-    Balance - <strong>{{ day.Balance }}</strong>
-  </div>
+<div
+  nz-row nzType="flex"
+  nzJustify="space-around"
+  *ngFor="let week of billsDays">
+    <div
+      *ngFor="let day of week.days"
+      nz-col
+      nzXs="8"
+      nzSm="3"
+      [className]="day.showAsDay ? 'cal-day' : 'cal-day'"
+    >
+      <span style="font-weight: bold">{{ day.Day }}</span>
+      <app-expense
+        [expenses]="day.desc"
+      ></app-expense>
+      <div style="clear:both; height: 4px"></div>
+      <span [style.visibility]="day.showAsDay ? 'visible' : 'hidden'">Balance - <strong>{{ day.Balance }}</strong></span>
+    </div>
 </div>
