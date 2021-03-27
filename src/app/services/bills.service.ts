@@ -36,7 +36,7 @@ export class BillsService {
       requestParams += 'hash_key_token_cs=' + hashCode + '&';
     }
 
-    this.http.get<any>('https://hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {
+    this.http.get<any>('https://budget.hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {
 
       this.billsSource.next(response);
     },
