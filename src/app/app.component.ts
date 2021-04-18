@@ -28,11 +28,15 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
 
+    this.currentDate = new Date();
+
     // get and subscribe to Coachee Growth Benchmarks Download Data
     this.subs.push(this.billsService.billsList.subscribe(response => {
       if (response) {
         this.billResults = response;
         this.billsList = response.results;
+        this.currentDate = null;
+        console.log('response.pay_date: ', response.pay_date);
         this.currentDate = new Date(response.pay_date);
         console.log('billsList: ', this.billsList);
       }
