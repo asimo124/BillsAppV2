@@ -1,5 +1,12 @@
 <ng-container *ngFor="let expense of expenses; let i = index">
-  <div class="cal-day-item"  [style.background-color]="getColor(i)">
-    {{ expense }}
-  </div>
+  <ng-container *ngIf="!expense.is_heavy" >
+    <div class="cal-day-item"  [style.background-color]="getColor(i)">
+      {{ expense.title }}
+    </div>
+  </ng-container>
+  <ng-container *ngIf="expense.is_heavy" >
+    <div class="cal-day-item" style="background-color: white; border: 1px solid red; color: red;">
+      {{ expense.title }}
+    </div>
+  </ng-container>
 </ng-container>

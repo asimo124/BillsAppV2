@@ -11,13 +11,14 @@ export class BillsService {
     results: any[];
     hash_key: string;
     cur_balance: number;
+    pay_date: string;
   };
   private billsSource = new BehaviorSubject(this.billResults);
   public billsList = this.billsSource.asObservable();
 
   constructor(private http: HttpClient) { }
 
-  loadBills(curBalance, payDate, hashCode) {
+  loadBills(curBalance, payDate, hashCode, prevDate, nextDate) {
 
     let date = null;
     if (!payDate) {
@@ -34,6 +35,11 @@ export class BillsService {
     }
     if (hashCode) {
       requestParams += 'hash_key_token_cs=' + hashCode + '&';
+    }
+    if (prevDate) {
+      requestParams += 'prev_date=1' + '&';
+    } else if (nextDate) {
+      requestParams += 'next_date=1' + '&';
     }
 
     this.http.get<any>('https://budget.hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {

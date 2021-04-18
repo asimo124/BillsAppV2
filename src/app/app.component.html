@@ -16,7 +16,7 @@
     <div class="inner-content">
 
       <div nz-row >
-        <div nz-col [nzSpan]="12" >
+        <div nz-col [nzSpan]="8" >
             <nz-form-control>
               <input
                 nz-input
@@ -26,15 +26,13 @@
               />
             </nz-form-control>
         </div>
-        <div nz-col [nzSpan]="12" >
+        <div nz-col [nzSpan]="16" >
             <nz-form-control>
               <nz-date-picker [(ngModel)]="currentDate" (ngModelChange)="onChange($event)" ></nz-date-picker>
+              <button nz-button [nzType]="'default'" (click)="loadPrevDate()">Previous</button>
+              <button nz-button [nzType]="'default'" (click)="loadNextDate()">Next</button>
+              <button nz-button [nzType]="'primary'" (click)="setDefaultsAndSearch()">Search</button>
             </nz-form-control>
-        </div>
-        <div nz-col [nzSpan]="6" >
-          <nz-form-control>
-            <button nz-button [nzType]="'primary'" (click)="loadBills()">Search</button>
-          </nz-form-control>
         </div>
       </div>
 

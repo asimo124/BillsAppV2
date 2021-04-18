@@ -8,7 +8,9 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnChanges {
-  currentDate;
+  currentDate: Date;
+  prevDate = false;
+  nextDate = false;
   curBalance: number;
   title = 'bills2';
   billResults: {
@@ -31,6 +33,7 @@ export class AppComponent implements OnInit, OnChanges {
       if (response) {
         this.billResults = response;
         this.billsList = response.results;
+        this.currentDate = new Date(response.pay_date);
         console.log('billsList: ', this.billsList);
       }
     }));
@@ -46,6 +49,24 @@ export class AppComponent implements OnInit, OnChanges {
     console.log('event: ', event.toLocaleString());
   }
 
+  loadPrevDate() {
+    this.nextDate = false;
+    this.prevDate = true;
+    this.loadBills();
+  }
+
+  loadNextDate() {
+    this.prevDate = false;
+    this.nextDate = true;
+    this.loadBills();
+  }
+
+  setDefaultsAndSearch() {
+    this.prevDate = false;
+    this.nextDate = false;
+    this.loadBills();
+  }
+
   loadBills() {
 
     let hashCode = '';
@@ -54,6 +75,6 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     const balance = this.curBalance ? this.curBalance : 0;
-    this.billsService.loadBills(balance, this.currentDate, hashCode);
+    this.billsService.loadBills(balance, this.currentDate, hashCode, this.prevDate, this.nextDate);
   }
 }
