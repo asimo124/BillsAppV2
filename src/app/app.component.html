@@ -29,6 +29,7 @@
         <div nz-col [nzSpan]="16" >
             <nz-form-control>
               <nz-date-picker [(ngModel)]="currentDate" (ngModelChange)="onChange($event)" ></nz-date-picker>
+              <button nz-button [nzType]="'default'" (click)="loadToday()">Today</button>
               <button nz-button [nzType]="'default'" (click)="loadPrevDate()">Previous</button>
               <button nz-button [nzType]="'default'" (click)="loadNextDate()">Next</button>
               <button nz-button [nzType]="'primary'" (click)="setDefaultsAndSearch()">Search</button>

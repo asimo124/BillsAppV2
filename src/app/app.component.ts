@@ -61,6 +61,11 @@ export class AppComponent implements OnInit, OnChanges {
     this.loadBills();
   }
 
+  loadToday() {
+    this.currentDate = new Date();
+    this.setDefaultsAndSearch();
+  }
+
   setDefaultsAndSearch() {
     this.prevDate = false;
     this.nextDate = false;
