@@ -16,7 +16,7 @@
     <div class="inner-content">
 
       <div nz-row >
-        <div nz-col [nzMd]="{ span: 8 }" [nzXs]="{ span: 12 }" >
+        <div nz-col [nzMd]="{ span: 8 }" [nzXs]="{ span: 12 }" *ngIf="billResults">
             <nz-form-control>
               <input
                 nz-input
@@ -32,6 +32,21 @@
 
             </nz-form-control>
         </div>
+        <div nz-col [nzMd]="{ span: 6 }" [nzXs]="{ span: 8 }" >
+          <nz-form-control>
+            <input
+              nz-input
+              placeholder="Extra Days"
+              [(ngModel)]="numDaysPayPeriod"
+              [value]="numDaysPayPeriod"
+            />
+          </nz-form-control>
+        </div>
+        <div nz-col [nzMd]="{ span: 4 }" [nzXs]="{ span: 6 }" >
+          <nz-form-control>
+            <button nz-button [nzType]="'primary'" (click)="updatePayPeriodNumDays()">Update</button>
+          </nz-form-control>
+        </div>
         <div nz-col [nzMd]="{ span: 10 }" [nzXs]="{ span: 24 }" >
           <nz-form-control>
             <button nz-button [nzType]="'default'" (click)="loadToday()">Today</button>
@@ -40,6 +55,12 @@
             <button nz-button [nzType]="'primary'" (click)="setDefaultsAndSearch()">Search</button>
           </nz-form-control>
         </div>
+        <div nz-col [nzMd]="{ span: 10 }" [nzXs]="{ span: 24 }" >
+          <nz-form-control>
+            Dispose Need: <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #18CC99">${{ getDisposableLeft() }}</span>
+          </nz-form-control>
+        </div>
+
       </div>
 
       <div style="clear: both; height: 15px;"></div>

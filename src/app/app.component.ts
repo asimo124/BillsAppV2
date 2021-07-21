@@ -11,7 +11,7 @@ export class AppComponent implements OnInit, OnChanges {
   currentDate: Date;
   prevDate = false;
   nextDate = false;
-  curBalance: number;
+  curBalance = 0;
   title = 'bills2';
   billResults: {
     results: any[];
@@ -19,6 +19,9 @@ export class AppComponent implements OnInit, OnChanges {
     cur_balance: number;
   };
   billsList: any[];
+  numDaysPayPeriod = 1;
+  remainingBalance = 950;
+  daysLeftCount = 0;
 
   subs: Subscription[] = [];
 
@@ -35,9 +38,25 @@ export class AppComponent implements OnInit, OnChanges {
       if (response) {
         this.billResults = response;
         this.billsList = response.results;
+
+        //*/
+        const self = this;
+        this.daysLeftCount = 0;
+        this.billsList.forEach(function getWeek(week) {
+          week.days.forEach(function getDay(day) {
+            if (day.showAsDay) {
+              self.daysLeftCount++;
+            }
+          });
+        });
+        //*/
+        this.curBalance = response.cur_balance;
+
         this.currentDate = null;
         console.log('response.pay_date: ', response.pay_date);
         this.currentDate = new Date(response.pay_date);
+        this.numDaysPayPeriod = response.num_days_pay_period;
+        this.remainingBalance = response.remaining_balance;
         console.log('billsList: ', this.billsList);
       }
     }));
@@ -85,5 +104,17 @@ export class AppComponent implements OnInit, OnChanges {
 
     const balance = this.curBalance ? this.curBalance : 0;
     this.billsService.loadBills(balance, this.currentDate, hashCode, this.prevDate, this.nextDate);
+  }
+
+  updatePayPeriodNumDays() {
+    this.billsService.savePayPeriodNumDays(this.numDaysPayPeriod, this.currentDate);
+  }
+
+  getDisposableNeeded() {
+    return (this.daysLeftCount + this.numDaysPayPeriod) * 60;
+  }
+
+  getDisposableLeft() {
+    return this.remainingBalance - this.getDisposableNeeded();
   }
 }

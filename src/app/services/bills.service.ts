@@ -12,6 +12,8 @@ export class BillsService {
     hash_key: string;
     cur_balance: number;
     pay_date: string;
+    num_days_pay_period: number;
+    remaining_balance: number;
   };
   private billsSource = new BehaviorSubject(this.billResults);
   public billsList = this.billsSource.asObservable();
@@ -45,6 +47,29 @@ export class BillsService {
     this.http.get<any>('https://budget.hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {
 
       this.billsSource.next(response);
+    },
+    (err) => {
+      console.log('error', 'Error loading Growth By Standards : ' + err.error.message);
+    });
+  }
+
+  savePayPeriodNumDays(numDays, payDate) {
+
+    let date = null;
+    if (!payDate) {
+      const today = new Date();
+      date = today.getFullYear() + '-' + (today.getMonth() + 1) + '-' + today.getDate();
+    } else {
+      date = payDate.toLocaleString();
+    }
+    if (!numDays) {
+      numDays = 1;
+    }
+
+    const requestParams = 'pay_date=' + date + '&num_days=' + numDays;
+
+    this.http.get<any>('https://budget.hawleywebdesign.com/api/save_pay_period_num_days.php?' + requestParams).subscribe(response => {
+
     },
     (err) => {
       console.log('error', 'Error loading Growth By Standards : ' + err.error.message);
