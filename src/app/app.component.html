@@ -57,7 +57,16 @@
         </div>
         <div nz-col [nzMd]="{ span: 10 }" [nzXs]="{ span: 24 }" >
           <nz-form-control>
-            Dispose Need: <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
+
+            Daily: <input
+              nz-input
+              placeholder="Day"
+              [(ngModel)]="disposablePerDay"
+              [value]="disposablePerDay"
+              [style.width]="'50px'"
+            />
+            Dispose Need:
+            &nbsp; <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
           </nz-form-control>
         </div>
 

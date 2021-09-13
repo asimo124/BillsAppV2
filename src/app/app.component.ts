@@ -23,6 +23,8 @@ export class AppComponent implements OnInit, OnChanges {
   remainingBalance = 950;
   daysLeftCount = 0;
 
+  disposablePerDay = 60;
+
   subs: Subscription[] = [];
 
   constructor(private billsService: BillsService) {
@@ -32,6 +34,11 @@ export class AppComponent implements OnInit, OnChanges {
   ngOnInit(): void {
 
     this.currentDate = new Date();
+
+    const disposablePerDay = localStorage.getItem('disposablePerDay');
+    if (disposablePerDay) {
+      this.disposablePerDay = parseInt(disposablePerDay, 10);
+    }
 
     // get and subscribe to Coachee Growth Benchmarks Download Data
     this.subs.push(this.billsService.billsList.subscribe(response => {
@@ -92,6 +99,11 @@ export class AppComponent implements OnInit, OnChanges {
   setDefaultsAndSearch() {
     this.prevDate = false;
     this.nextDate = false;
+
+    if (this.disposablePerDay) {
+      localStorage.setItem('disposablePerDay', String(this.disposablePerDay));
+    }
+
     this.loadBills();
   }
 
@@ -107,11 +119,16 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   updatePayPeriodNumDays() {
+
+    if (this.disposablePerDay) {
+      localStorage.setItem('disposablePerDay', String(this.disposablePerDay));
+    }
+
     this.billsService.savePayPeriodNumDays(this.numDaysPayPeriod, this.currentDate);
   }
 
   getDisposableNeeded() {
-    return (this.daysLeftCount + this.numDaysPayPeriod) * 60;
+    return (this.daysLeftCount + this.numDaysPayPeriod) * this.disposablePerDay;
   }
 
   getDisposableLeft() {
