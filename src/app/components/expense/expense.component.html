@@ -1,19 +1,17 @@
 <ng-container *ngFor="let expense of expenses; let i = index">
-  <ng-container *ngIf="!expense.is_heavy" >
+  <ng-container *ngIf="!expense.is_heavy && expense.vnd_frequency != 'Once'" >
     <div class="cal-day-item"  [style.background-color]="getColor(i)">
       {{ expense.title }}
     </div>
   </ng-container>
-  <ng-container *ngIf="expense.vnd_frequency == 'Once'; else heavyDay">
+  <ng-container *ngIf="expense.vnd_frequency == 'Once' && !expense.is_heavy">
     <div class="cal-day-item" style="background-color: yellow; border: 1px solid #2aa80a; color: #2aa80a;">
       {{ expense.title }}
     </div>
   </ng-container>
-  <ng-template #heavyDay>
-    <ng-container *ngIf="expense.is_heavy">
-      <div class="cal-day-item" style="background-color: white; border: 1px solid red; color: red;">
-        {{ expense.title }}
-      </div>
-    </ng-container>
-  </ng-template>
+  <ng-container *ngIf="expense.is_heavy && expense.vnd_frequency != 'Once'">
+    <div class="cal-day-item" style="background-color: white; border: 1px solid red; color: red;">
+      {{ expense.title }}
+    </div>
+  </ng-container>
 </ng-container>
