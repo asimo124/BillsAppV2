@@ -52,6 +52,7 @@
             <button nz-button [nzType]="'default'" (click)="loadToday()">Today</button>
             <button nz-button [nzType]="'default'" (click)="loadPrevDate()">Previous</button>
             <button nz-button [nzType]="'default'" (click)="loadNextDate()">Next</button>
+            <button nz-button [nzType]="'danger'" (click)="toggleExpand()">{{ (!isExpanded) ? 'Expand' : 'Collapse' }}</button>
             <button nz-button [nzType]="'primary'" (click)="setDefaultsAndSearch()">Search</button>
           </nz-form-control>
         </div>
@@ -78,6 +79,7 @@
 
       <app-days-of-week
         [billsDays]="billsList"
+        [isExpanded]="isExpanded"
       ></app-days-of-week>
     </div>
   </nz-content>

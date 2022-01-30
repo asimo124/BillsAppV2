@@ -8,6 +8,8 @@ import {Subscription} from 'rxjs';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit, OnChanges {
+
+  isExpanded = false;
   currentDate: Date;
   prevDate = false;
   nextDate = false;
@@ -90,6 +92,15 @@ export class AppComponent implements OnInit, OnChanges {
     this.nextDate = true;
     this.loadBills();
   }
+
+  toggleExpand() {
+    if (!this.isExpanded) {
+      this.isExpanded = true;
+    } else {
+      this.isExpanded = false;
+    }
+  }
+
 
   loadToday() {
     this.currentDate = new Date();

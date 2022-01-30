@@ -8,6 +8,7 @@ import {Component, Input, OnInit} from '@angular/core';
 export class DaysOfWeekComponent implements OnInit {
 
   @Input() billsDays: any;
+  @Input() isExpanded = false;
 
   constructor() { }
 
