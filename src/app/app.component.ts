@@ -26,6 +26,7 @@ export class AppComponent implements OnInit, OnChanges {
   daysLeftCount = 0;
 
   disposablePerDay = 60;
+  finalDays = 14;
 
   subs: Subscription[] = [];
 
@@ -139,7 +140,8 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   getDisposableNeeded() {
-    return (this.daysLeftCount + this.numDaysPayPeriod) * this.disposablePerDay;
+    this.finalDays = this.daysLeftCount +  this.numDaysPayPeriod;
+    return this.finalDays * this.disposablePerDay;
   }
 
   getDisposableLeft() {
