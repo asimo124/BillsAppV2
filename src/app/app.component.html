@@ -65,9 +65,10 @@
               [(ngModel)]="disposablePerDay"
               [value]="disposablePerDay"
               [style.width]="'50px'"
-            />
+            />&nbsp;
+            Days: <span style="font-weight: bold; color: #1890ff">{{ daysLeftCount }}</span>
             Dispose Need:
-            &nbsp; <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
+            <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
           </nz-form-control>
         </div>
 
