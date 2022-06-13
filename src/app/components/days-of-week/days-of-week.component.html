@@ -1,7 +1,7 @@
 <div
   nz-row nzType="flex"
   nzJustify="space-around"
-  [style.margin-bottom]="(isExpanded) ? '360px' : ''"
+  [style.margin-bottom]="(isExpanded) ? expandHeight + 'px' : ''"
   *ngFor="let week of billsDays">
     <div
       *ngFor="let day of week.days"

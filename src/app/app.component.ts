@@ -10,6 +10,7 @@ import {Subscription} from 'rxjs';
 export class AppComponent implements OnInit, OnChanges {
 
   isExpanded = false;
+  expandHeight = '720';
   currentDate: Date;
   prevDate = false;
   nextDate = false;

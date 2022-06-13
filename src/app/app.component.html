@@ -66,9 +66,16 @@
               [value]="disposablePerDay"
               [style.width]="'50px'"
             />&nbsp;
+            Height: <input
+            nz-input
+            placeholder="Day"
+            [(ngModel)]="expandHeight"
+            [value]="expandHeight"
+            [style.width]="'50px'" />&nbsp;
             Days: <span style="font-weight: bold; color: #1890ff">{{ finalDays }}</span>
             Dispose Need:
             <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
+
           </nz-form-control>
         </div>
 
@@ -81,6 +88,7 @@
       <app-days-of-week
         [billsDays]="billsList"
         [isExpanded]="isExpanded"
+        [expandHeight]="expandHeight"
       ></app-days-of-week>
     </div>
   </nz-content>

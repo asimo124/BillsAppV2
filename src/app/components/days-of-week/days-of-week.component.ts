@@ -9,6 +9,7 @@ export class DaysOfWeekComponent implements OnInit {
 
   @Input() billsDays: any;
   @Input() isExpanded = false;
+  @Input() expandHeight = '720';
 
   constructor() { }
 
