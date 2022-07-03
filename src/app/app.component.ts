@@ -37,6 +37,9 @@ export class AppComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
 
+    if (localStorage.getItem('expandHeight')) {
+      this.expandHeight = localStorage.expandHeight;
+    }
     this.currentDate = new Date();
 
     const disposablePerDay = localStorage.getItem('disposablePerDay');
@@ -76,7 +79,7 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   ngOnChanges(changes: SimpleChanges): void {
-
+    console.log('changes: ', changes);
   }
 
   onChange(event) {
@@ -98,6 +101,11 @@ export class AppComponent implements OnInit, OnChanges {
   toggleExpand() {
     if (!this.isExpanded) {
       this.isExpanded = true;
+
+      localStorage.setItem('expandHeight', this.expandHeight);
+
+
+
     } else {
       this.isExpanded = false;
     }
@@ -146,6 +154,6 @@ export class AppComponent implements OnInit, OnChanges {
   }
 
   getDisposableLeft() {
-    return this.remainingBalance - this.getDisposableNeeded();
+    return (this.remainingBalance - this.getDisposableNeeded()).toFixed(2);
   }
 }
