@@ -74,11 +74,14 @@
             [style.width]="'50px'" />&nbsp;
             Days: <span style="font-weight: bold; color: #1890ff">{{ finalDays }}</span>
             Dispose Need:
-            <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>
+            <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>&nbsp;
+            Test Mode: <nz-switch [(ngModel)]="testMode"></nz-switch>
+
+
 
           </nz-form-control>
-        </div>
 
+        </div>
       </div>
 
       <div style="clear: both; height: 15px;"></div>

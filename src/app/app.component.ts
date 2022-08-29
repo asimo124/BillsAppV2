@@ -29,6 +29,8 @@ export class AppComponent implements OnInit, OnChanges {
   disposablePerDay = 60;
   finalDays = 14;
 
+  testMode = false;
+
   subs: Subscription[] = [];
 
   constructor(private billsService: BillsService) {
@@ -136,7 +138,7 @@ export class AppComponent implements OnInit, OnChanges {
     }
 
     const balance = this.curBalance ? this.curBalance : 0;
-    this.billsService.loadBills(balance, this.currentDate, hashCode, this.prevDate, this.nextDate);
+    this.billsService.loadBills(balance, this.currentDate, hashCode, this.prevDate, this.nextDate, this.testMode);
   }
 
   updatePayPeriodNumDays() {

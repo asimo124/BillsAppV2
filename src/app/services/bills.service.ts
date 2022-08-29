@@ -20,7 +20,7 @@ export class BillsService {
 
   constructor(private http: HttpClient) { }
 
-  loadBills(curBalance, payDate, hashCode, prevDate, nextDate) {
+  loadBills(curBalance, payDate, hashCode, prevDate, nextDate, testMode = false) {
 
     let date = null;
     if (!payDate) {
@@ -42,6 +42,9 @@ export class BillsService {
       requestParams += 'prev_date=1' + '&';
     } else if (nextDate) {
       requestParams += 'next_date=1' + '&';
+    }
+    if (testMode) {
+      requestParams += 'test_mode=1' + '&';
     }
 
     this.http.get<any>('https://budget.hawleywebdesign.com/api/loadBillDates2.php?' + requestParams).subscribe(response => {
