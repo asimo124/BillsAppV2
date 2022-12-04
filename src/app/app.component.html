@@ -92,6 +92,7 @@
         [billsDays]="billsList"
         [isExpanded]="isExpanded"
         [expandHeight]="expandHeight"
+        (shouldCallToggleEnabled)="updateRunningTotals()"
       ></app-days-of-week>
     </div>
   </nz-content>

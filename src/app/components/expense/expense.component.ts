@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-expense',
@@ -7,6 +7,7 @@ import {Component, Input, OnInit} from '@angular/core';
 })
 export class ExpenseComponent implements OnInit {
 
+  @Output() didToggleEnabled: EventEmitter<any> = new EventEmitter<number>();
   @Input() expenses: any[];
 
   colors = [
@@ -31,6 +32,18 @@ export class ExpenseComponent implements OnInit {
       const newIndex = index % 7;
       return this.colors[newIndex];
     }
+  }
+
+  toggleEnabled(index) {
+
+    this.expenses[index].isEnabled = !(this.expenses[index].isEnabled);
+    if (!this.expenses[index].isEnabled) {
+      this.expenses[index].amount = 0;
+    } else {
+      this.expenses[index].amount = this.expenses[index].savedAmount;
+    }
+
+    this.didToggleEnabled.emit(1);
   }
 
 }

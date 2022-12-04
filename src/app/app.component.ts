@@ -31,6 +31,8 @@ export class AppComponent implements OnInit, OnChanges {
 
   testMode = false;
 
+  runningTotalBalance: number;
+
   subs: Subscription[] = [];
 
   constructor(private billsService: BillsService) {
@@ -139,6 +141,31 @@ export class AppComponent implements OnInit, OnChanges {
 
     const balance = this.curBalance ? this.curBalance : 0;
     this.billsService.loadBills(balance, this.currentDate, hashCode, this.prevDate, this.nextDate, this.testMode);
+  }
+
+  updateRunningTotals() {
+
+    this.runningTotalBalance = this.curBalance;
+
+    let i = 0;
+    const self = this;
+    let dayBalance = this.runningTotalBalance;
+    this.billsList.forEach(function getWeek(week) {
+      let j = 0;
+
+      week.days.forEach(function getDay(day) {
+
+        day.desc.forEach(function getExpense(expense) {
+
+          dayBalance -= expense.amount;
+        });
+        self.billsList[i].days[j].Balance = dayBalance;
+        self.remainingBalance = dayBalance;
+
+        j++;
+      });
+      i++;
+    });
   }
 
   updatePayPeriodNumDays() {

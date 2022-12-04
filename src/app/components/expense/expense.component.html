@@ -1,16 +1,22 @@
 <ng-container *ngFor="let expense of expenses; let i = index">
   <ng-container *ngIf="!expense.is_heavy && expense.vnd_frequency != 'Once'" >
-    <div class="cal-day-item"  [style.background-color]="getColor(i)">
+    <div class="cal-day-item"  [style.background-color]="getColor(i)" (click)="toggleEnabled(i)"
+         [style.text-decoration]="(!expense.isEnabled) ? 'line-through' : ''"
+    >
       {{ expense.title }}
     </div>
   </ng-container>
   <ng-container *ngIf="expense.vnd_frequency == 'Once' && !expense.is_heavy">
-    <div class="cal-day-item" style="background-color: yellow; border: 1px solid #2aa80a; color: #2aa80a;">
+    <div class="cal-day-item" style="background-color: yellow; border: 1px solid #2aa80a; color: #2aa80a;"
+         (click)="toggleEnabled(i)" [style.text-decoration]="(!expense.isEnabled) ? 'line-through' : ''"
+    >
       {{ expense.title }}
     </div>
   </ng-container>
-  <ng-container *ngIf="expense.is_heavy && expense.vnd_frequency != 'Once'">
-    <div class="cal-day-item" style="background-color: white; border: 1px solid red; color: red;">
+  <ng-container *ngIf="expense.is_heavy && expense.vnd_frequency != 'Once'" >
+    <div class="cal-day-item" style="background-color: white; border: 1px solid red; color: red;"
+         (click)="toggleEnabled(i)" [style.text-decoration]="(!expense.isEnabled) ? 'line-through' : ''"
+    >
       {{ expense.title }}
     </div>
   </ng-container>

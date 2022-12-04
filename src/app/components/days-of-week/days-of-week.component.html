@@ -13,6 +13,7 @@
       <span style="font-weight: bold">{{ day.Day }}</span>
       <app-expense
         [expenses]="day.desc"
+        (didToggleEnabled)="callToggleEnabled($event)"
       ></app-expense>
       <div style="clear:both; height: 4px"></div>
       <span [style.visibility]="day.showAsDay ? 'visible' : 'hidden'">Balance - <strong>{{ day.Balance }}</strong></span>
