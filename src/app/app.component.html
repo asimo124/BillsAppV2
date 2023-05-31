@@ -77,7 +77,7 @@
             <span style="font-weight: bold; color: #1890ff">${{ getDisposableNeeded() }}</span>&nbsp;Dispose Left: <span style="font-weight: bold; color: #2aa80a">${{ getDisposableLeft() }}</span>&nbsp;
             Test Mode: <nz-switch [(ngModel)]="testMode"></nz-switch>
 
-
+            Add Last Days: <nz-switch [(ngModel)]="addLastDays" (ngModelChange)="updateLastDays()"></nz-switch>
 
           </nz-form-control>
 
